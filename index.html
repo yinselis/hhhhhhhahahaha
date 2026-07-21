@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE MIRAGE - 终端校验</title>
+    <title>THE MIRAGE</title>
     <style>
         :root {
             --vintage-red: #8b1515;
@@ -435,7 +435,10 @@
         <a id="final-link" class="reward-link" href="#" target="_blank">
             [ 正在解析... ]
         </a>
-        
+        <p style="margin-top: 15px; font-size: 14px; margin-bottom: 5px;">【备用地址】</p>
+<a id="alt-link" class="reward-link" style="font-size: 16px;" href="#" target="_blank">
+    [ 正在解析备用... ]
+</a>
         <p style="margin-top: 30px; font-size: 14px;">最后啰嗦一句：进去后遇到不懂的，随便点点试试看。<br>再见了，人类。</p>
     </div>
 
@@ -456,6 +459,14 @@
     function generateSecureUrl() {
         return _ptX + _ptY + _base1 + _base2 + _ext + _name + _ver;
     }
+    // [+++ 备用链接配置区 +++]
+const _alt1 = "mi" + "rage";
+const _alt2 = "-" + "3c4";
+const _alt3 = ".pa" + "ges.de" + "v" + String.fromCharCode(47); // ".pages.dev/"
+
+function generateAltUrl() {
+    return _ptX + _ptY + _alt1 + _alt2 + _alt3;
+}
     // =========================================================================
 
     // 自定义弹窗逻辑
@@ -481,12 +492,20 @@
     }
 
     function showReward() {
-        switchScene('scene-reward');
-        const url = generateSecureUrl();
-        const linkEl = document.getElementById('final-link');
-        linkEl.href = url;
-        linkEl.innerText = url;
+    switchScene('scene-reward');
+    const url = generateSecureUrl();
+    const linkEl = document.getElementById('final-link');
+    linkEl.href = url;
+    linkEl.innerText = url;
+    
+    // 生成并显示备用链接
+    const altUrl = generateAltUrl();
+    const altLinkEl = document.getElementById('alt-link');
+    if(altLinkEl) {
+        altLinkEl.href = altUrl;
+        altLinkEl.innerText = altUrl;
     }
+}
 
     // ================= 试炼进度管理 =================
     let trialsPassed = 0;
